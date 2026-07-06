@@ -1,0 +1,720 @@
+% ============================================================================
+% Trabajo Práctico Final — Deep Learning
+% Sistema de Detección y Segmentación de Objetos en Tiempo Real
+% Autor: Federico Morán
+% Compilar con pdflatex (Texmaker: compilación rápida PDFLaTeX, 2 pasadas
+% para resolver referencias cruzadas).
+% ============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figuras/}}
+\captionsetup{font=small,labelfont=bf}
+
+\title{\textbf{Sistema de Detección y Segmentación de Objetos en Tiempo Real
+mediante Ajuste Fino de YOLOv8}\\[1ex]
+\large Trabajo Práctico Final --- Deep Learning\\
+Maestría en Inteligencia Artificial}
+\author{Federico Morán}
+\date{Julio de 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+Este trabajo presenta el desarrollo de un sistema completo de visión por
+computadora capaz de detectar y segmentar, en tiempo real, ocho clases de
+objetos de entorno doméstico y de oficina. Se construyó un conjunto de datos de
+5.000 imágenes y 23.363 instancias anotadas a partir de COCO~2017, se realizó
+el ajuste fino (\emph{fine-tuning}) de un modelo de segmentación de instancias
+YOLOv8n-seg preentrenado, y se evaluó el resultado sobre una partición de
+prueba con las métricas estándar del área. El modelo ajustado alcanzó un
+mAP@50-95 de 0,524 para detección (cajas) y de 0,452 para segmentación
+(máscaras), lo que representa una mejora relativa del 30\,\% y el 32\,\%
+respectivamente frente al modelo preentrenado de referencia evaluado sobre las
+mismas imágenes. El sistema de inferencia, implementado sobre OpenCV con
+captura de cámara web, opera a 17~cuadros por segundo sobre una CPU de
+consumo, y alcanza 35~cuadros por segundo al optimizar el modelo con OpenVINO,
+lo que valida la viabilidad de la segmentación de instancias en tiempo real
+sobre hardware no especializado.
+\end{abstract}
+
+% ============================================================================
+\section{Introducción}
+
+La detección y segmentación de objetos son dos tareas centrales de la visión
+por computadora. La \textbf{detección} localiza cada objeto mediante una caja
+delimitadora y le asigna una clase; la \textbf{segmentación de instancias} va
+un paso más allá y delimita, píxel a píxel, la silueta exacta de cada objeto
+individual. Su combinación en un único sistema que opere en \emph{tiempo real}
+habilita aplicaciones de robótica, asistencia, control de inventario y
+análisis de video, entre otras, pero impone un compromiso exigente entre
+precisión y latencia, en particular cuando la inferencia debe ejecutarse sobre
+hardware de consumo sin aceleración dedicada.
+
+El objetivo general de este trabajo es desarrollar un sistema completo de
+visión por computadora que detecte y segmente objetos en tiempo real. Los
+objetivos específicos son: (i)~construir un conjunto de datos supervisado a
+partir de COCO~2017; (ii)~ajustar un modelo de segmentación de instancias
+mediante transferencia de aprendizaje; (iii)~evaluarlo con las métricas
+estándar del área (mAP e IoU, tanto para cajas como para máscaras), incluida
+la comparación contra el modelo preentrenado de referencia; y (iv)~implementar
+la inferencia en tiempo real sobre una computadora personal, con captura de
+cámara web.
+
+El alcance se acotó a ocho clases de objetos de entorno doméstico y de
+oficina (\texttt{person}, \texttt{cell phone}, \texttt{cup}, \texttt{bottle},
+\texttt{laptop}, \texttt{keyboard}, \texttt{mouse}, \texttt{book}),
+seleccionadas con un criterio de aplicación: todas pueden exhibirse
+físicamente frente a una cámara web durante la demostración del sistema.
+
+El documento se organiza como sigue. La Sección~\ref{sec:datos} describe la
+construcción del conjunto de datos. La Sección~\ref{sec:metodo} presenta la
+arquitectura, el preprocesamiento, el aumento de datos y la configuración de
+entrenamiento. La Sección~\ref{sec:resultados} reporta los experimentos y
+resultados. La Sección~\ref{sec:tiemporeal} describe el sistema de inferencia
+en tiempo real y sus mediciones de desempeño. La Sección~\ref{sec:conclusiones}
+expone las conclusiones.
+
+% ============================================================================
+\section{Conjunto de datos}
+\label{sec:datos}
+
+\subsection{Fuente y selección}
+
+Se utilizó \textbf{COCO 2017} (\emph{Common Objects in Context})
+\cite{lin2014coco}, el conjunto de datos de referencia para detección y
+segmentación de instancias: sus 80 categorías de objetos cotidianos están
+anotadas a nivel de instancia mediante polígonos, lo que habilita ambas
+tareas. En lugar de descargar el conjunto completo ($\sim$19~GB), se realizó
+una \emph{descarga selectiva} mediante la biblioteca FiftyOne
+\cite{moore2020fiftyone}: se obtuvieron 5.000 imágenes del split de
+entrenamiento que contienen al menos una instancia de las clases objetivo,
+junto con sus anotaciones de segmentación, con selección aleatoria y semilla
+fija para garantizar la reproducibilidad.
+
+Las anotaciones se filtraron para conservar únicamente las instancias de las
+ocho clases de interés, lo que define con precisión el alcance del problema:
+los objetos de las restantes 72 categorías pasan a formar parte del fondo. El
+subconjunto resultante contiene \textbf{23.363 instancias anotadas}, con un
+promedio de 4,67 objetos por imagen (mediana 3, máximo 47).
+
+La Figura~\ref{fig:dist} muestra la distribución de instancias por clase. El
+desbalance es pronunciado: \texttt{person} concentra el 74,2\,\% de las
+instancias, mientras que \texttt{mouse} apenas reúne 139 ejemplos. Este
+desbalance, heredado de la estadística natural de COCO, no se corrigió de
+forma artificial, pero se tiene presente al interpretar las métricas por clase
+de la Sección~\ref{sec:resultados}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{dist_clases.pdf}
+  \caption{Distribución de instancias anotadas por clase en el subconjunto
+  construido (5.000 imágenes de COCO 2017).}
+  \label{fig:dist}
+\end{figure}
+
+\subsection{Particiones}
+
+El subconjunto se dividió en tres particiones disjuntas a nivel de imagen,
+con semilla fija: \textbf{entrenamiento} (60\,\%, 3.000 imágenes), destinada
+al ajuste de los pesos; \textbf{validación} (15\,\%, 750 imágenes), empleada
+para el monitoreo del entrenamiento y la selección del mejor punto de
+control; y \textbf{prueba} (25\,\%, 1.250 imágenes), reservada exclusivamente
+para la evaluación final, de modo que las métricas reportadas sobre ella no
+intervienen en ninguna decisión de entrenamiento. Se verificó que la
+distribución de clases se mantuviera aproximadamente proporcional entre
+particiones.
+
+\subsection{Conversión al formato YOLO de segmentación}
+
+El entrenador de Ultralytics requiere las anotaciones en formato YOLO de
+segmentación: un archivo de texto por imagen en el que cada línea describe una
+instancia como un índice de clase seguido de los vértices de su polígono,
+normalizados al rango $[0,1]$. La conversión comprendió dos pasos:
+
+\begin{enumerate}
+  \item \textbf{De máscaras a polígonos.} Las instancias de COCO cargadas por
+  FiftyOne se representan como máscaras binarias; se convirtieron a polígonos
+  con una tolerancia de simplificación de 2~píxeles, que reduce el número de
+  vértices sin pérdida perceptible de fidelidad geométrica.
+  \item \textbf{Saneamiento de fragmentos degenerados.} Las máscaras
+  multi-parte (objetos divididos por oclusión) y los objetos muy pequeños
+  pueden producir, tras la simplificación, polígonos de menos de tres
+  vértices, que el cargador de Ultralytics interpreta como cajas y rechaza.
+  Estas líneas ---aproximadamente el 3\,\% del total, fragmentos sin área
+  significativa--- se eliminaron de los archivos exportados; la componente
+  principal de cada objeto conserva su polígono.
+\end{enumerate}
+
+Como control de calidad se reconstruyeron las anotaciones a partir de los
+archivos exportados y se superpusieron sobre las imágenes correspondientes
+(Figura~\ref{fig:verificacion}), validando la cadena completa de conversión:
+formato, normalización de coordenadas y asignación de índices de clase.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{verificacion_etiquetas.png}
+  \caption{Verificación de la conversión: anotaciones reconstruidas desde los
+  archivos YOLO exportados, superpuestas sobre tres imágenes de
+  entrenamiento. Los polígonos coinciden con los contornos de los objetos y
+  las etiquetas de clase son correctas.}
+  \label{fig:verificacion}
+\end{figure}
+
+% ============================================================================
+\section{Metodología}
+\label{sec:metodo}
+
+\subsection{Arquitectura: YOLOv8n-seg}
+
+Se adoptó \textbf{YOLOv8-seg} \cite{jocher2023yolov8}, un modelo de
+segmentación de instancias de una sola etapa (\emph{one-stage}) y libre de
+anclas (\emph{anchor-free}), heredero de la familia YOLO
+\cite{redmon2016yolo}. Su arquitectura se compone de:
+
+\begin{itemize}
+  \item un \textbf{backbone} convolucional (CSPDarknet con bloques C2f) que
+  extrae mapas de características a múltiples escalas;
+  \item un \textbf{neck} de tipo PAN-FPN que fusiona información semántica de
+  alto nivel con detalle espacial de bajo nivel;
+  \item una \textbf{cabeza desacoplada} que predice, para cada objeto, la caja
+  delimitadora, la clase y un vector de coeficientes de máscara, junto con una
+  rama que genera \emph{prototipos} de máscara a resolución de imagen (esquema
+  derivado de YOLACT \cite{bolya2019yolact}). La máscara final de cada
+  instancia se obtiene como combinación lineal de los prototipos, lo que
+  permite segmentar con costo computacional casi constante por imagen.
+\end{itemize}
+
+Se eligió la variante \textbf{nano} (3,26~millones de parámetros,
+11,4~GFLOPs), la de menor capacidad de la familia, porque el requisito de
+tiempo real debe satisfacerse sobre la CPU de una computadora personal: es la
+variante con mejor relación desempeño--latencia para ese escenario.
+
+\textbf{Estrategia de transferencia.} Se partió de los pesos preentrenados en
+COCO completo y se ajustaron \emph{todos} los parámetros sobre el subconjunto
+de 8 clases (ajuste fino completo, sin congelamiento de capas). Dado que el
+dominio de origen y el de destino coinciden ---las ocho clases pertenecen a
+COCO---, el preentrenamiento aporta representaciones ya adecuadas y el ajuste
+se concentra en especializar el modelo en el vocabulario reducido, lo que
+permite converger en pocas épocas con un conjunto de datos moderado.
+
+\subsection{Preprocesamiento y aumento de datos}
+
+\textbf{Preprocesamiento} (entrenamiento e inferencia): toda imagen se
+redimensiona a $640\times640$ píxeles mediante \emph{letterbox} (se preserva
+la relación de aspecto y se rellena con bordes neutros) y las intensidades se
+normalizan al rango $[0,1]$.
+
+\textbf{Aumento de datos} (solo entrenamiento): amplía artificialmente la
+variabilidad del conjunto de entrenamiento y actúa como regularizador. Se
+empleó el esquema estándar de Ultralytics, que transforma de manera
+consistente las imágenes \emph{y} sus polígonos de segmentación. La
+Tabla~\ref{tab:aug} resume las transformaciones y su justificación; la
+Figura~\ref{fig:mosaico} ilustra un lote de entrenamiento real con
+\emph{mosaic}. Se omitieron el volteo vertical, las rotaciones y
+\emph{mixup}, que generarían poses inverosímiles para el dominio sin
+beneficio esperado.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Esquema de aumento de datos empleado durante el entrenamiento.}
+  \label{tab:aug}
+  \begin{tabular}{@{}llp{8.2cm}@{}}
+    \toprule
+    \textbf{Transformación} & \textbf{Valor} & \textbf{Justificación} \\
+    \midrule
+    \emph{Mosaic} & 1,0 & Compone cuatro imágenes en una: expone al modelo a
+    objetos en contextos y escalas atípicos. Se desactiva en las últimas 10
+    épocas (\texttt{close\_mosaic}=10). \\
+    Volteo horizontal & $p=0,5$ & Los objetos del dominio no tienen
+    quiralidad relevante; duplica la variabilidad de pose. \\
+    Traslación & $\pm$10\,\% & Robustez ante encuadres imperfectos,
+    frecuentes en una cámara web. \\
+    Escala & $\pm$50\,\% & Robustez ante variaciones de distancia
+    objeto--cámara, críticas para la demostración en vivo. \\
+    Perturbación HSV & $h{=}0{,}015$; $s{=}0{,}7$; $v{=}0{,}4$ & Robustez ante
+    cambios de iluminación y balance de color entre las escenas de COCO y la
+    cámara del usuario. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{mosaico_entrenamiento.jpg}
+  \caption{Lote de entrenamiento real con aumento \emph{mosaic}: cada muestra
+  compone cuatro imágenes con sus máscaras transformadas de manera
+  consistente.}
+  \label{fig:mosaico}
+\end{figure}
+
+\subsection{Configuración del entrenamiento}
+\label{sec:config}
+
+El entrenamiento se ejecutó en un servidor con GPU NVIDIA GeForce RTX~5090
+(32~GB), con Ultralytics~8.4.89, PyTorch~2.12.1 (CUDA~13.0) y Python~3.12. La
+Tabla~\ref{tab:config} resume la configuración. El tamaño de lote se fijó
+explícitamente en 32 y los procesos de precarga de datos en 4, valores
+elegidos para acotar el consumo de memoria del sistema en el servidor
+compartido. El optimizador AdamW \cite{loshchilov2019adamw} y su tasa de
+aprendizaje fueron seleccionados por la heurística automática de Ultralytics.
+El mejor punto de control se seleccionó por el mAP@50-95 de máscaras sobre la
+partición de validación, alcanzado en la última época (0,450).
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Configuración del entrenamiento.}
+  \label{tab:config}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Parámetro} & \textbf{Valor} \\
+    \midrule
+    Modelo base & \texttt{yolov8n-seg.pt} (preentrenado en COCO) \\
+    Épocas & 60 (early stopping con paciencia 15; completó las 60) \\
+    Resolución de entrada & $640\times640$ (letterbox) \\
+    Tamaño de lote & 32 \\
+    Optimizador & AdamW (selección automática), $lr_0 = 8{,}33\times10^{-4}$,
+    momento 0,9 \\
+    Decaimiento de pesos & $5\times10^{-4}$ \\
+    Precisión mixta (AMP) & Sí \\
+    Semilla & 42 (modo determinista) \\
+    Duración total & 86,5 minutos \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ============================================================================
+\section{Experimentos y resultados}
+\label{sec:resultados}
+
+\subsection{Protocolo de evaluación}
+
+Las métricas siguen el protocolo estándar de COCO. El \textbf{IoU}
+(\emph{Intersection over Union}) mide el solapamiento entre una predicción
+$P$ y su anotación de referencia $G$:
+\begin{equation}
+  IoU(P, G) = \frac{|P \cap G|}{|P \cup G|},
+\end{equation}
+y se aplica tanto a cajas delimitadoras como a máscaras. Una predicción es un
+verdadero positivo si su IoU con una anotación de la misma clase supera un
+umbral dado. La \textbf{AP} (\emph{Average Precision}) de una clase es el
+área bajo su curva precisión--recall, y el \textbf{mAP} es su promedio sobre
+las clases. Se reportan las dos variantes estándar: \textbf{mAP@50} (umbral
+de IoU de 0,5, criterio laxo) y \textbf{mAP@50-95} (promedio sobre umbrales
+de 0,5 a 0,95 en pasos de 0,05, criterio estricto que premia la precisión de
+la localización), calculadas por separado para cajas (detección) y máscaras
+(segmentación). Toda la evaluación de esta sección se realiza sobre la
+partición de \textbf{prueba} (1.250 imágenes, 7.117 instancias).
+
+\subsection{Curvas de aprendizaje}
+
+La Figura~\ref{fig:curvas} muestra la evolución del entrenamiento. Las
+pérdidas de caja y de segmentación decrecen de forma sostenida tanto en
+entrenamiento como en validación, sin divergencia entre ambas ---no se
+observa sobreajuste. Que la pérdida de validación se ubique por debajo de la
+de entrenamiento es esperable: la pérdida de entrenamiento se calcula sobre
+lotes fuertemente aumentados (\emph{mosaic}), más difíciles que las imágenes
+naturales de validación. El mAP de validación crece de forma monótona
+(mAP@50 de cajas: de 0,27 en la primera época a 0,70 en la última) y presenta
+el repunte característico en las últimas 10 épocas, cuando \emph{mosaic} se
+desactiva y el modelo termina de ajustarse sobre imágenes de estadística
+natural (mAP@50-95 de máscaras: de 0,422 en la época 50 a 0,450 en la 60).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{curvas_entrenamiento.pdf}
+  \caption{Evolución del entrenamiento. Izquierda: pérdidas de caja y de
+  segmentación en entrenamiento (línea continua) y validación (línea
+  discontinua). Derecha: mAP@50 y mAP@50-95 sobre la partición de validación,
+  para cajas y máscaras.}
+  \label{fig:curvas}
+\end{figure}
+
+\subsection{Métricas sobre la partición de prueba}
+
+La Tabla~\ref{tab:global} resume las métricas globales del modelo ajustado
+sobre la partición de prueba y la Tabla~\ref{tab:porclase} las desglosa por
+clase; la Figura~\ref{fig:porclase} las presenta gráficamente.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Métricas globales sobre la partición de prueba (1.250 imágenes,
+  7.117 instancias).}
+  \label{tab:global}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    \textbf{Métrica} & \textbf{Cajas (detección)} & \textbf{Máscaras (segmentación)} \\
+    \midrule
+    Precisión media & 0,767 & 0,752 \\
+    Recall medio    & 0,626 & 0,609 \\
+    mAP@50          & 0,705 & 0,675 \\
+    mAP@50-95       & \textbf{0,524} & \textbf{0,452} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Métricas por clase sobre la partición de prueba.}
+  \label{tab:porclase}
+  \begin{tabular}{@{}lrcccc@{}}
+    \toprule
+    & & \multicolumn{2}{c}{\textbf{Cajas}} & \multicolumn{2}{c}{\textbf{Máscaras}} \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-6}
+    \textbf{Clase} & \textbf{Instancias} & \textbf{mAP@50} & \textbf{mAP@50-95}
+    & \textbf{mAP@50} & \textbf{mAP@50-95} \\
+    \midrule
+    person     & 5.448 & 0,711 & 0,499 & 0,686 & 0,408 \\
+    cell phone &   103 & 0,518 & 0,354 & 0,477 & 0,299 \\
+    cup        &   415 & 0,747 & 0,536 & 0,733 & 0,476 \\
+    bottle     &   527 & 0,657 & 0,449 & 0,627 & 0,374 \\
+    laptop     &    94 & 0,927 & 0,792 & 0,905 & 0,694 \\
+    keyboard   &    40 & 0,882 & 0,697 & 0,882 & 0,663 \\
+    mouse      &    35 & 0,808 & 0,634 & 0,783 & 0,553 \\
+    book       &   455 & 0,393 & 0,228 & 0,306 & 0,149 \\
+    \midrule
+    \textbf{Todas} & 7.117 & 0,705 & 0,524 & 0,675 & 0,452 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{map_por_clase.pdf}
+  \caption{mAP@50-95 por clase sobre la partición de prueba, para cajas y
+  máscaras.}
+  \label{fig:porclase}
+\end{figure}
+
+Del desglose surgen tres observaciones:
+
+\begin{itemize}
+  \item \textbf{Mejores clases: laptop, keyboard y mouse} (mAP@50-95 de cajas
+  de 0,792, 0,697 y 0,634). Son objetos rígidos, de contorno regular y que
+  suelen aparecer a escala considerable y poco ocluidos, condiciones
+  favorables tanto para la localización como para la segmentación.
+  \item \textbf{Peor clase: book} (0,228 en cajas, 0,149 en máscaras). En
+  COCO los libros aparecen mayoritariamente apilados o en estanterías, en
+  instancias pequeñas, parcialmente visibles y con límites ambiguos entre
+  ejemplares contiguos; la propia anotación de referencia es inconsistente en
+  esos casos. Es una dificultad conocida de esta categoría.
+  \item \textbf{Las máscaras puntúan sistemáticamente por debajo de las
+  cajas} (0,452 frente a 0,524 global). El criterio de IoU a nivel de píxel
+  es más estricto que el de solapamiento de rectángulos, en particular para
+  contornos complejos como los de \texttt{person}, donde la diferencia es
+  máxima (0,408 frente a 0,499).
+\end{itemize}
+
+\subsection{Matriz de confusión y curvas precisión--recall}
+
+La matriz de confusión normalizada (Figura~\ref{fig:confusion}) muestra que el
+modelo prácticamente \textbf{no confunde clases entre sí}: la mayor confusión
+inter-clase es de apenas 0,02. El modo de error dominante es la
+\textbf{omisión} (objetos reales clasificados como fondo), que afecta sobre
+todo a \texttt{book} (64\,\% de las instancias omitidas) y \texttt{cell
+phone} (53\,\%), y en mucha menor medida a \texttt{keyboard} (10\,\%) y
+\texttt{laptop} (12\,\%). Este patrón es coherente con el análisis por clase:
+el vocabulario reducido hace que el problema de clasificación sea sencillo, y
+el desafío restante es la detección de instancias pequeñas u ocluidas. Las
+curvas precisión--recall (Figura~\ref{fig:pr}) muestran el mismo ordenamiento
+de clases en ambas tareas.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{confusion_matrix.png}
+  \caption{Matriz de confusión normalizada por columnas sobre la partición de
+  prueba (columnas: clase real; filas: clase predicha). La diagonal concentra
+  las predicciones correctas; la última fila corresponde a objetos reales no
+  detectados (omisiones).}
+  \label{fig:confusion}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{pr_box.png}
+    \caption{Cajas (detección).}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{pr_mask.png}
+    \caption{Máscaras (segmentación).}
+  \end{subfigure}
+  \caption{Curvas precisión--recall por clase sobre la partición de prueba,
+  con umbral de IoU de 0,5. El área bajo cada curva es la AP@50 de la clase.}
+  \label{fig:pr}
+\end{figure}
+
+\subsection{Comparación con el modelo de referencia}
+\label{sec:baseline}
+
+Para cuantificar el aporte del ajuste fino se evaluó el modelo
+\textbf{preentrenado original} (\texttt{yolov8n-seg.pt}, 80 clases) sobre la
+\emph{misma} partición de prueba. Para ello, la partición se exportó
+adicionalmente con el vocabulario completo de 80 clases de COCO, de modo que
+los índices de clase de las etiquetas coincidieran con los del modelo, y de
+los resultados se extrajeron las AP de las ocho clases de interés. La
+Tabla~\ref{tab:baseline} y la Figura~\ref{fig:baseline} presentan la
+comparación sobre la métrica principal (mAP@50-95 de máscaras).
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Comparación del mAP@50-95 de máscaras por clase, sobre la partición
+  de prueba, entre el modelo preentrenado de referencia y el modelo ajustado.}
+  \label{tab:baseline}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Clase} & \textbf{Baseline preentrenado} & \textbf{Ajustado (este trabajo)} & \textbf{Mejora} \\
+    \midrule
+    person     & 0,324 & 0,408 & $+$0,084 \\
+    cell phone & 0,192 & 0,299 & $+$0,107 \\
+    cup        & 0,334 & 0,476 & $+$0,142 \\
+    bottle     & 0,269 & 0,374 & $+$0,105 \\
+    laptop     & 0,579 & 0,694 & $+$0,115 \\
+    keyboard   & 0,431 & 0,663 & $+$0,232 \\
+    mouse      & 0,553 & 0,553 & $\phantom{+}$0,000 \\
+    book       & 0,058 & 0,149 & $+$0,091 \\
+    \midrule
+    \textbf{Promedio} & 0,342 & \textbf{0,452} & $+$\textbf{0,110} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{baseline_vs_finetuned.pdf}
+  \caption{Aporte del ajuste fino por clase: mAP@50-95 de máscaras sobre la
+  partición de prueba.}
+  \label{fig:baseline}
+\end{figure}
+
+El ajuste fino mejora la métrica global de máscaras de 0,342 a 0,452
+($+$32\,\% relativo) y la de cajas de 0,403 a 0,524 ($+$30\,\% relativo). La
+mejora es generalizada y máxima en \texttt{keyboard} ($+$0,232); la única
+clase sin mejora es \texttt{mouse}, cuyo desempeño de partida ya era alto y
+que cuenta con muy pocos ejemplos de entrenamiento para especializar.
+
+\textbf{Consideración metodológica.} La comparación es conservadora respecto
+del baseline: el modelo preentrenado resuelve un problema más difícil (80
+clases posibles frente a 8), por lo que parte de la mejora observada se
+explica por la reducción del vocabulario además de por el ajuste de los
+pesos. La comparación cuantifica, en definitiva, el beneficio conjunto de
+especializar el modelo en el dominio de aplicación.
+
+\subsection{Análisis cualitativo}
+
+La Figura~\ref{fig:cualitativo} contrasta las predicciones de ambos modelos
+sobre el mismo lote de 16 imágenes de la partición de prueba. El efecto de la
+especialización es visible: el baseline dispersa sus predicciones entre
+categorías fuera del alcance del sistema (\texttt{surfboard}, \texttt{tie},
+\texttt{boat}, \texttt{bench}, \texttt{cow}), mientras que el modelo ajustado
+concentra sus detecciones en las ocho clases de interés con confianzas más
+altas y máscaras ajustadas al contorno. Se aprecian también los modos de
+error residuales identificados en la matriz de confusión: personas pequeñas
+en escenas concurridas y libros en estanterías que no son detectados.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{cualitativo_baseline.jpg}
+    \caption{Modelo preentrenado de referencia (80 clases).}
+  \end{subfigure}\\[1ex]
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{cualitativo_finetuned.jpg}
+    \caption{Modelo ajustado (8 clases, este trabajo).}
+  \end{subfigure}
+  \caption{Predicciones de ambos modelos sobre el mismo lote de imágenes de la
+  partición de prueba (umbral de confianza de la rutina de validación).}
+  \label{fig:cualitativo}
+\end{figure}
+
+% ============================================================================
+\section{Sistema de inferencia en tiempo real}
+\label{sec:tiemporeal}
+
+\subsection{Implementación}
+
+El sistema de inferencia (\texttt{src/demo\_webcam.py}) captura video de una
+cámara web ---o de un archivo--- mediante OpenCV, ejecuta el modelo sobre
+cada cuadro y superpone en pantalla las cajas, las máscaras de instancia, las
+etiquetas de clase con su confianza y la tasa de cuadros por segundo (FPS),
+esta última suavizada con una media móvil exponencial para una lectura
+estable. Los parámetros operativos (fuente de video, umbral de confianza,
+resolución de inferencia) son configurables por línea de comandos.
+
+Dado que la computadora de demostración no dispone de GPU con CUDA, se evaluó
+además la \textbf{optimización del modelo con OpenVINO} \cite{openvino}: los
+pesos entrenados se exportaron al formato de representación intermedia de
+Intel (\texttt{src/export\_openvino.py}), especializado para inferencia sobre
+CPU y gráficos integrados Intel.
+
+\subsection{Desempeño medido}
+
+La Tabla~\ref{tab:velocidad} resume las mediciones de latencia en las tres
+configuraciones evaluadas. En el servidor, la rutina de validación reporta
+5,1~ms por imagen ($\sim$198~FPS teóricos), holgadamente en tiempo real. En
+la computadora personal (CPU Intel Core Ultra~5~226V), el modelo original en
+formato PyTorch opera a 17~FPS, y la variante OpenVINO lo duplica hasta
+35~FPS, superando el umbral convencional de tiempo real (24--30~FPS) sobre
+hardware de consumo sin aceleración dedicada.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Velocidad de inferencia medida (resolución de entrada de 640
+  píxeles).}
+  \label{tab:velocidad}
+  \begin{tabular}{@{}llcc@{}}
+    \toprule
+    \textbf{Plataforma} & \textbf{Formato del modelo} & \textbf{Latencia} & \textbf{FPS} \\
+    \midrule
+    Servidor, GPU RTX 5090 & PyTorch (\texttt{.pt}) & 5,1 ms/imagen & $\sim$198 \\
+    PC personal, CPU Core Ultra 5 & PyTorch (\texttt{.pt}) & $\sim$59 ms/cuadro & 17 \\
+    PC personal, CPU Core Ultra 5 & OpenVINO & $\sim$29 ms/cuadro & \textbf{35} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+La Figura~\ref{fig:webcam} muestra el sistema en operación sobre una escena
+real de escritorio. En ambas capturas el modelo detecta y segmenta
+correctamente los cinco objetos presentes (\texttt{person}, \texttt{book},
+\texttt{mouse}, \texttt{bottle}), con máscaras que siguen el contorno de los
+objetos ---incluida la silueta de la persona y el libro abierto sostenido en
+la mano--- bajo la iluminación no controlada de la escena. El indicador de
+FPS en pantalla evidencia la ganancia de la optimización: 17,2~FPS con el
+modelo PyTorch frente a 35,6~FPS con OpenVINO, sobre la misma escena y el
+mismo hardware.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{webcam_pt.png}
+    \caption{Modelo PyTorch (\texttt{.pt}): 17,2 FPS.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{webcam_openvino.png}
+    \caption{Modelo OpenVINO: 35,6 FPS.}
+  \end{subfigure}
+  \caption{Demostración del sistema en tiempo real sobre cámara web (CPU
+  Intel Core Ultra 5 226V, sin GPU dedicada). Misma escena, cinco objetos
+  detectados y segmentados en ambos casos.}
+  \label{fig:webcam}
+\end{figure}
+
+% ============================================================================
+\section{Conclusiones}
+\label{sec:conclusiones}
+
+Se desarrolló un sistema completo de visión por computadora que cubre el ciclo
+íntegro de un proyecto de aprendizaje profundo aplicado: construcción de un
+conjunto de datos supervisado (5.000 imágenes y 23.363 instancias de COCO
+2017, con conversión y saneamiento de anotaciones de segmentación), ajuste
+fino de un modelo de segmentación de instancias YOLOv8n-seg, evaluación
+rigurosa con las métricas estándar del área e implementación de la inferencia
+en tiempo real sobre hardware de consumo. Del trabajo se extraen las
+siguientes conclusiones:
+
+\begin{enumerate}
+  \item \textbf{La transferencia de aprendizaje es efectiva y eficiente para
+  especializar un detector--segmentador en un vocabulario reducido.} Con
+  3.000 imágenes de entrenamiento y 60 épocas (86,5 minutos de GPU), el
+  ajuste fino elevó el mAP@50-95 promedio sobre las ocho clases de 0,403 a
+  0,524 en detección y de 0,342 a 0,452 en segmentación ($+$30\,\% y
+  $+$32\,\% relativos frente al modelo preentrenado evaluado sobre las mismas
+  imágenes), con mejoras en siete de las ocho clases.
+  \item \textbf{El desempeño por clase está gobernado por las características
+  visuales y la calidad de anotación de cada categoría.} Los objetos rígidos
+  y poco ocluidos (\texttt{laptop}, \texttt{keyboard}, \texttt{mouse})
+  superan 0,63 de mAP@50-95 de cajas, mientras que \texttt{book} ---instancias
+  pequeñas, apiladas y de anotación ambigua en COCO--- queda en 0,228. La
+  matriz de confusión muestra que el error dominante no es la confusión entre
+  clases (máximo 0,02) sino la omisión de instancias pequeñas u ocluidas, lo
+  que señala que el margen de mejora está en el recall y no en la
+  discriminación.
+  \item \textbf{La segmentación de instancias en tiempo real es viable sobre
+  una CPU de consumo.} La variante nano de YOLOv8-seg, exportada a OpenVINO,
+  alcanzó 35~FPS sostenidos en una computadora personal sin GPU dedicada
+  ---el doble que el formato PyTorch original---, validando la combinación de
+  una arquitectura compacta con optimización específica del hardware de
+  despliegue como estrategia para llevar modelos de segmentación a
+  aplicaciones interactivas.
+  \item \textbf{El pipeline resultó reproducible de extremo a extremo}: la
+  selección de datos, las particiones y el entrenamiento están gobernados por
+  semillas fijas, y la demostración en vivo confirmó que el desempeño
+  cuantitativo medido sobre COCO se traslada a escenas reales no controladas,
+  con máscaras que siguen fielmente el contorno de los objetos.
+\end{enumerate}
+
+\vspace{1.5em}
+\noindent\textbf{Anexos.} Acompañan a este informe los notebooks ejecutados
+del pipeline (\texttt{01\_dataset}, \texttt{02\_entrenamiento},
+\texttt{03\_evaluacion}), el código fuente del sistema de inferencia
+(\texttt{src/}) y los pesos del modelo entrenado
+(\texttt{models/yolov8n\_seg\_best.pt}).
+
+% ============================================================================
+\begin{thebibliography}{9}
+
+\bibitem{lin2014coco}
+T.-Y. Lin, M. Maire, S. Belongie, J. Hays, P. Perona, D. Ramanan,
+P. Dollár y C. L. Zitnick,
+``Microsoft COCO: Common Objects in Context'',
+en \emph{Proc. European Conference on Computer Vision (ECCV)}, 2014.
+
+\bibitem{jocher2023yolov8}
+G. Jocher, A. Chaurasia y J. Qiu,
+``Ultralytics YOLOv8'', 2023.
+Disponible en: \url{https://github.com/ultralytics/ultralytics}
+
+\bibitem{bolya2019yolact}
+D. Bolya, C. Zhou, F. Xiao y Y. J. Lee,
+``YOLACT: Real-time Instance Segmentation'',
+en \emph{Proc. IEEE/CVF International Conference on Computer Vision (ICCV)}, 2019.
+
+\bibitem{redmon2016yolo}
+J. Redmon, S. Divvala, R. Girshick y A. Farhadi,
+``You Only Look Once: Unified, Real-Time Object Detection'',
+en \emph{Proc. IEEE Conference on Computer Vision and Pattern Recognition
+(CVPR)}, 2016.
+
+\bibitem{moore2020fiftyone}
+B. E. Moore y J. J. Corso,
+``FiftyOne'', GitHub, 2020.
+Disponible en: \url{https://github.com/voxel51/fiftyone}
+
+\bibitem{loshchilov2019adamw}
+I. Loshchilov y F. Hutter,
+``Decoupled Weight Decay Regularization'',
+en \emph{Proc. International Conference on Learning Representations (ICLR)}, 2019.
+
+\bibitem{openvino}
+Intel Corporation,
+``OpenVINO Toolkit: Open-source toolkit for optimizing and deploying AI
+inference''.
+Disponible en: \url{https://docs.openvino.ai}
+
+\end{thebibliography}
+
+\end{document}

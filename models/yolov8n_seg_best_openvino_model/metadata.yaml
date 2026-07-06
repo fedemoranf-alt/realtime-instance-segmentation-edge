@@ -1,0 +1,32 @@
+description: Ultralytics YOLOv8n-seg model trained on /data/students/federico.moran/TPF
+  - Computer Vision/data/coco_subset/dataset.yaml
+author: Ultralytics
+date: '2026-07-06T01:59:09.868403'
+version: 8.4.89
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: segment
+head: Segment
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: person
+  1: cell phone
+  2: cup
+  3: bottle
+  4: laptop
+  5: keyboard
+  6: mouse
+  7: book
+args:
+  data: null
+  batch: 1
+  fraction: 1.0
+  quantize: null
+  dynamic: false
+  nms: false
+channels: 3
+end2end: false

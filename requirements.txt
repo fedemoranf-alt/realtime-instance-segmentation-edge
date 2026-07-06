@@ -1,0 +1,18 @@
+# Núcleo del pipeline (servidor y local)
+ultralytics>=8.2.0
+fiftyone>=0.24.0
+pycocotools>=2.0.7    # requerido por FiftyOne para decodificar las anotaciones de COCO
+opencv-python>=4.9.0
+ipywidgets            # barras de progreso en JupyterLab (tqdm)
+
+# Análisis y visualización (notebooks)
+numpy
+pandas
+matplotlib
+
+# Nota: torch/torchvision los instala ultralytics como dependencia; en el
+# servidor GPU conviene usar la instalación de PyTorch con CUDA ya provista.
+
+# Opcional (solo local): aceleración de la demo sobre CPU/GPU Intel.
+# ultralytics lo instala automáticamente al ejecutar src/export_openvino.py.
+# openvino>=2024.1

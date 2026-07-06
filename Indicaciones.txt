@@ -1,0 +1,10 @@
+Objetivo: Desarrollar sistema completo de visión por computadora
+Entregables: Pipeline completo + modelo entrenado + reporte técnico
+Dataset sugerido: COCO, Pascal VOC, o dataset de dominio específico
+Requisitos:
+• Implementar detección y/o segmentación de objetos
+• Incluir preprocesamiento y data augmentation
+• Evaluar con métricas estándar (mAP, IoU)
+• Implementar inferencia en tiempo real
+
+• Preparar una presentación oral del trabajo realizado con demostraciones de la aplicación implementada.
