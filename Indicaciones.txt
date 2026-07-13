@@ -5,6 +5,9 @@ Requisitos:
 • Implementar detección y/o segmentación de objetos
 • Incluir preprocesamiento y data augmentation
 • Evaluar con métricas estándar (mAP, IoU)
-• Implementar inferencia en tiempo real
+• Implementar inferencia en t/iempo real
 
 • Preparar una presentación oral del trabajo realizado con demostraciones de la aplicación implementada.
+
+-Entregar un reporte en documento pdf explicando cada proceso (desde la explicación del dataset hasta las inferencias en test y métricas finales) adjuntando una imagen del código en cada paso realizado (o alguna otra forma de visualizar el código que implementaron).
+- Para demostrar la inferencia en aplicación se pide la codificación necesaria para hacer correr el modelo que utilizaron con una muestra de datos de entrada para testear en tiempo real. Se valorará el ingenio para hacer correr esto en servidores privados o públicos sin la necesidad de descargar archivos (proveer solo el link y que corra en la nube).

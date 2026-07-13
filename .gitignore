@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+ejemplos/
+.ipynb_checkpoints/
+
+data/
+Entregables/
+yolov8n-seg.pt
+Federico_Moran-Pipeline_modelos_app.zip

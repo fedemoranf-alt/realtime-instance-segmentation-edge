@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.5.25)  6 JUL 2026 02:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.5.25)  10 JUL 2026 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -302,7 +302,48 @@ File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
 )
 LaTeX Info: Redefining \microtypesetup on input line 3065.
 )
-(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count291
+\lst@gtempboxa=\box56
+\lst@token=\toks31
+\lst@length=\count292
+\lst@currlwidth=\dimen183
+\lst@column=\count293
+\lst@pos=\count294
+\lst@lostspace=\dimen184
+\lst@width=\dimen185
+\lst@newlines=\count295
+\lst@lineno=\count296
+\lst@maxwidth=\dimen186
+
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count297
+\lst@skipnumbers=\count298
+\lst@framebox=\box57
+)
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+) (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2023-11-26 v7.01g Hypertext links for LaTeX
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
@@ -354,11 +395,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count291
+\c@section@level=\count299
 )
-\@linkdim=\dimen183
-\Hy@linkcounter=\count292
-\Hy@pagecounter=\count293
+\@linkdim=\dimen187
+\Hy@linkcounter=\count300
+\Hy@pagecounter=\count301
  (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2023-11-26 v7.01g Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -366,7 +407,7 @@ Now handling font encoding PD1 ...
 ) (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count294
+\Hy@SavedSpaceFactor=\count302
  (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2023-11-26 v7.01g Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -379,14 +420,14 @@ Package hyperref Info: Plain pages OFF on input line 4196.
 Package hyperref Info: Backreferencing OFF on input line 4201.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4448.
-\c@Hy@tempcnt=\count295
+\c@Hy@tempcnt=\count303
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4786.
-\XeTeXLinkMargin=\dimen184
+\XeTeXLinkMargin=\dimen188
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -396,9 +437,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count296
-\Field@Width=\dimen185
-\Fld@charsize=\dimen186
+\Fld@menulength=\count304
+\Field@Width=\dimen189
+\Fld@charsize=\dimen190
 Package hyperref Info: Hyper figures OFF on input line 6065.
 Package hyperref Info: Link nesting OFF on input line 6070.
 Package hyperref Info: Hyper index ON on input line 6073.
@@ -411,9 +452,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6095.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count297
-\c@Item=\count298
-\c@Hfootnote=\count299
+\Hy@abspage=\count305
+\c@Item=\count306
+\c@Hfootnote=\count307
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
@@ -424,8 +465,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count300
-\c@bookmark@seq@number=\count301
+\Fld@listcount=\count308
+\c@bookmark@seq@number=\count309
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
 echeck.sty
@@ -440,7 +481,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip54
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 34
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 69
 .
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
@@ -449,34 +490,34 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count302
-\l__pdf_internal_box=\box56
+\l__color_backend_stack_int=\count310
+\l__pdf_internal_box=\box58
 ) (informe.aux
-LaTeX Info: Redefining \. on input line 13.
-LaTeX Info: Redefining \% on input line 13.
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
 )
 \openout1 = `informe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Info: Redefining \. on input line 34.
-LaTeX Info: Redefining \% on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Info: Redefining \. on input line 69.
+LaTeX Info: Redefining \% on input line 69.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -516,17 +557,17 @@ LaTeX Info: Redefining \% on input line 34.
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count303
-\scratchdimen=\dimen187
-\scratchbox=\box57
-\nofMPsegments=\count304
-\nofMParguments=\count305
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count306
-\MPscratchDim=\dimen188
-\MPnumerator=\count307
-\makeMPintoPDFobject=\count308
-\everyMPtoPDFconversion=\toks32
+\scratchcounter=\count311
+\scratchdimen=\dimen191
+\scratchbox=\box59
+\nofMPsegments=\count312
+\nofMParguments=\count313
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count314
+\MPscratchDim=\dimen192
+\MPnumerator=\count315
+\makeMPintoPDFobject=\count316
+\everyMPtoPDFconversion=\toks33
 )
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -540,14 +581,15 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 34.
-Package microtype Info: Applying patch `item' on input line 34.
-Package microtype Info: Applying patch `toc' on input line 34.
-Package microtype Info: Applying patch `eqnum' on input line 34.
-Package microtype Info: Applying patch `footnote' on input line 34.
-Package microtype Info: Applying patch `verbatim' on input line 34.
-LaTeX Info: Redefining \microtypesetup on input line 34.
+LaTeX Info: Redefining \microtypecontext on input line 69.
+Package microtype Info: Applying patch `item' on input line 69.
+Package microtype Info: Applying patch `toc' on input line 69.
+Package microtype Info: Applying patch `eqnum' on input line 69.
+Package microtype Info: Applying patch `footnote' on input line 69.
+Package microtype Info: Applying patch `verbatim' on input line 69.
+LaTeX Info: Redefining \microtypesetup on input line 69.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -563,50 +605,45 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 34.
+\c@lstlisting=\count317
+Package hyperref Info: Link coloring OFF on input line 69.
 
 (informe.out) (informe.out)
 \@outlinefile=\write3
 \openout3 = `informe.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-7.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 7
+2.
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-7.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 7
+2.
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-37.
+72.
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-37.
+72.
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 37.
+(Font)              <12> on input line 72.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 37.
+(Font)              <8> on input line 72.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 37.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 48.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 48.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 48.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-1.
+(Font)              <6> on input line 72.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+24.
 
 (C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -615,138 +652,187 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 104.
  [1
 
 {C:/Users/moran/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/mora
 n/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
-<figuras/dist_clases.pdf, id=103, 542.025pt x 245.718pt>
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 148.
+
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 165.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+167.
+
+(C:\Users\moran\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package microtype Info: Character `texttrademark ' is missing
+(microtype)             in font `TS1/lmtt/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+<figuras/dist_clases.pdf, id=113, 578.16pt x 260.17201pt>
 File: figuras/dist_clases.pdf Graphic file (type pdf)
 <use figuras/dist_clases.pdf>
-Package pdftex.def Info: figuras/dist_clases.pdf  used on input line 126.
-(pdftex.def)             Requested size: 386.96027pt x 175.42833pt.
+Package pdftex.def Info: figuras/dist_clases.pdf  used on input line 187.
+(pdftex.def)             Requested size: 386.96027pt x 174.13171pt.
  [2{C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.e
-nc}{C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{
-C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc} 
-<./figuras/dist_clases.pdf>]
-<figuras/verificacion_etiquetas.png, id=151, 1076.1003pt x 346.896pt>
+nc}{C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}
+]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 207.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 207.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 207.
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <8> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 213.
+
+[3{C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C
+:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc} <
+./figuras/dist_clases.pdf>]
+<figuras/verificacion_etiquetas.png, id=198, 1084.05pt x 375.804pt>
 File: figuras/verificacion_etiquetas.png Graphic file (type png)
 <use figuras/verificacion_etiquetas.png>
 Package pdftex.def Info: figuras/verificacion_etiquetas.png  used on input line
- 172.
-(pdftex.def)             Requested size: 455.24411pt x 146.75395pt.
- [3 <./figuras/verificacion_etiquetas.png>]
-<figuras/mosaico_entrenamiento.jpg, id=169, 1927.2pt x 1927.2pt>
+ 272.
+(pdftex.def)             Requested size: 455.24411pt x 157.8194pt.
+ [4 <./figuras/verificacion_etiquetas.png>]
+<figuras/mosaico_entrenamiento.jpg, id=230, 1927.2pt x 1927.2pt>
 File: figuras/mosaico_entrenamiento.jpg Graphic file (type jpg)
 <use figuras/mosaico_entrenamiento.jpg>
 Package pdftex.def Info: figuras/mosaico_entrenamiento.jpg  used on input line 
-261.
+372.
 (pdftex.def)             Requested size: 364.19667pt x 364.17215pt.
- [4] [5 <./figuras/mosaico_entrenamiento.jpg>]
-<figuras/curvas_entrenamiento.pdf, id=187, 794.97pt x 274.626pt>
+ [5]
+[6 <./figuras/mosaico_entrenamiento.jpg>] [7]
+<figuras/curvas_entrenamiento.pdf, id=284, 794.97pt x 289.08pt>
 File: figuras/curvas_entrenamiento.pdf Graphic file (type pdf)
 <use figuras/curvas_entrenamiento.pdf>
-Package pdftex.def Info: figuras/curvas_entrenamiento.pdf  used on input line 3
-43.
-(pdftex.def)             Requested size: 455.24411pt x 157.27176pt.
- [6 <./figuras/curvas_entrenamiento.pdf>]
-<figuras/map_por_clase.pdf, id=243, 542.025pt x 245.718pt>
+Package pdftex.def Info: figuras/curvas_entrenamiento.pdf  used on input line 5
+04.
+(pdftex.def)             Requested size: 455.24411pt x 165.54922pt.
+ [8 <./figuras/curvas_entrenamiento.pdf>]
+<figuras/map_por_clase.pdf, id=344, 614.295pt x 274.626pt>
 File: figuras/map_por_clase.pdf Graphic file (type pdf)
 <use figuras/map_por_clase.pdf>
-Package pdftex.def Info: figuras/map_por_clase.pdf  used on input line 403.
-(pdftex.def)             Requested size: 386.96027pt x 175.42833pt.
- [7 <./figuras/map_por_clase.pdf>]
-<figuras/confusion_matrix.png, id=298, 867.24pt x 650.43pt>
+Package pdftex.def Info: figuras/map_por_clase.pdf  used on input line 564.
+(pdftex.def)             Requested size: 386.96027pt x 172.99434pt.
+ [9 <./figuras/map_por_clase.pdf>]
+<figuras/confusion_matrix.png, id=398, 867.24pt x 650.43pt>
 File: figuras/confusion_matrix.png Graphic file (type png)
 <use figuras/confusion_matrix.png>
-Package pdftex.def Info: figuras/confusion_matrix.png  used on input line 444.
+Package pdftex.def Info: figuras/confusion_matrix.png  used on input line 612.
 (pdftex.def)             Requested size: 364.19667pt x 273.14896pt.
-<figuras/pr_box.png, id=299, 650.43pt x 433.62pt>
+<figuras/pr_box.png, id=399, 650.43pt x 433.62pt>
 File: figuras/pr_box.png Graphic file (type png)
 <use figuras/pr_box.png>
-Package pdftex.def Info: figuras/pr_box.png  used on input line 455.
+Package pdftex.def Info: figuras/pr_box.png  used on input line 623.
 (pdftex.def)             Requested size: 223.07211pt x 148.71245pt.
-<figuras/pr_mask.png, id=300, 650.43pt x 433.62pt>
+<figuras/pr_mask.png, id=400, 650.43pt x 433.62pt>
 File: figuras/pr_mask.png Graphic file (type png)
 <use figuras/pr_mask.png>
-Package pdftex.def Info: figuras/pr_mask.png  used on input line 460.
+Package pdftex.def Info: figuras/pr_mask.png  used on input line 628.
 (pdftex.def)             Requested size: 223.07211pt x 148.71245pt.
- [8 <./figuras/confusion_matrix.png>]
-<figuras/baseline_vs_finetuned.pdf, id=310, 542.025pt x 245.718pt>
+ [10 <./figuras/confusion_matrix.png> <./figuras/pr_box.png> <./figuras/pr_mask
+.png>]
+<figuras/baseline_vs_finetuned.pdf, id=414, 614.295pt x 274.626pt>
 File: figuras/baseline_vs_finetuned.pdf Graphic file (type pdf)
 <use figuras/baseline_vs_finetuned.pdf>
 Package pdftex.def Info: figuras/baseline_vs_finetuned.pdf  used on input line 
-506.
-(pdftex.def)             Requested size: 386.96027pt x 175.42833pt.
- [9 <./figuras/pr_box.png> <./figuras/pr_mask.png>]
-<figuras/cualitativo_baseline.jpg, id=322, 1927.2pt x 1011.78pt>
+704.
+(pdftex.def)             Requested size: 386.96027pt x 172.99434pt.
+ [11] [12 <./figuras/baseline_vs_finetuned.pdf>]
+<figuras/cualitativo_baseline.jpg, id=487, 1141.866pt x 794.313pt>
 File: figuras/cualitativo_baseline.jpg Graphic file (type jpg)
 <use figuras/cualitativo_baseline.jpg>
-Package pdftex.def Info: figuras/cualitativo_baseline.jpg  used on input line 5
-40.
-(pdftex.def)             Requested size: 455.24411pt x 239.0034pt.
-<figuras/cualitativo_finetuned.jpg, id=323, 1927.2pt x 1011.78pt>
+Package pdftex.def Info: figuras/cualitativo_baseline.jpg  used on input line 7
+92.
+(pdftex.def)             Requested size: 455.24411pt x 316.67723pt.
+<figuras/cualitativo_finetuned.jpg, id=488, 1141.866pt x 794.313pt>
 File: figuras/cualitativo_finetuned.jpg Graphic file (type jpg)
 <use figuras/cualitativo_finetuned.jpg>
 Package pdftex.def Info: figuras/cualitativo_finetuned.jpg  used on input line 
-544.
-(pdftex.def)             Requested size: 455.24411pt x 239.0034pt.
- [10 <./figuras/baseline_vs_finetuned.pdf>] [11 <./figuras/cualitativo_baseline
-.jpg> <./figuras/cualitativo_finetuned.jpg>]
-<figuras/webcam_pt.png, id=380, 479.29062pt x 380.92313pt>
+796.
+(pdftex.def)             Requested size: 455.24411pt x 316.67723pt.
+ [13]
+Overfull \vbox (4.28589pt too high) has occurred while \output is active []
+
+
+[14 <./figuras/cualitativo_baseline.jpg> <./figuras/cualitativo_finetuned.jpg>]
+Package microtype Info: Character `texttrademark ' is missing
+(microtype)             in font `TS1/lmtt/m/it/8'.
+(microtype)             Ignoring protrusion settings for this character.
+[15]
+<figuras/webcam_pt.png, id=529, 479.29062pt x 380.92313pt>
 File: figuras/webcam_pt.png Graphic file (type png)
 <use figuras/webcam_pt.png>
-Package pdftex.def Info: figuras/webcam_pt.png  used on input line 612.
+Package pdftex.def Info: figuras/webcam_pt.png  used on input line 891.
 (pdftex.def)             Requested size: 223.07211pt x 177.29016pt.
-<figuras/webcam_openvino.png, id=381, 479.29062pt x 382.93062pt>
+<figuras/webcam_openvino.png, id=530, 479.29062pt x 382.93062pt>
 File: figuras/webcam_openvino.png Graphic file (type png)
 <use figuras/webcam_openvino.png>
-Package pdftex.def Info: figuras/webcam_openvino.png  used on input line 617.
+Package pdftex.def Info: figuras/webcam_openvino.png  used on input line 896.
 (pdftex.def)             Requested size: 223.07211pt x 178.22449pt.
- [12 <./figuras/webcam_pt.png> <./figuras/webcam_openvino.png>]
-Overfull \hbox (45.27756pt too wide) in paragraph at lines 671--676
+<prueba_huggingface.png, id=534, 712.6625pt x 476.27937pt>
+File: prueba_huggingface.png Graphic file (type png)
+<use prueba_huggingface.png>
+Package pdftex.def Info: prueba_huggingface.png  used on input line 937.
+(pdftex.def)             Requested size: 455.24411pt x 304.24362pt.
+ [16 <./figuras/webcam_pt.png> <./figuras/webcam_openvino.png>] [17 <./prueba_h
+uggingface.png>]
+Overfull \hbox (45.27756pt too wide) in paragraph at lines 1004--1009
 \T1/lmr/bx/n/10.95 (-20) Anexos. \T1/lmr/m/n/10.95 (-20) Acom-pa-ñan a es-te in
 -for-me los no-te-books eje-cu-ta-dos del pi-pe-li-ne (\T1/lmtt/m/n/10.95 01_da
 taset\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 02_entrenamiento\T1/lmr/m/n/1
 0.95 (-20) ,
  []
 
-[13] [14] (informe.aux
-LaTeX Info: Redefining \. on input line 13.
-LaTeX Info: Redefining \% on input line 13.
+[18] [19] (informe.aux
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
 )
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `informe.out' has not changed.
-(rerunfilecheck)             Checksum: DE5367065A3E84DCC13E32BBAE4AACC8;3697.
+(rerunfilecheck)             Checksum: F2E95A750F143586F13DD695B1031D0F;4237.
  ) 
 Here is how much of TeX's memory you used:
- 15360 strings out of 474486
- 253126 string characters out of 5743755
- 1940542 words of memory out of 5000000
- 37146 multiletter control sequences out of 15000+600000
- 640985 words of font info for 198 fonts, out of 8000000 for 9000
+ 17984 strings out of 474486
+ 288517 string characters out of 5743755
+ 2134542 words of memory out of 5000000
+ 39591 multiletter control sequences out of 15000+600000
+ 652664 words of font info for 230 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,79p,1006b,624s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,1006b,1667s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pf
 b><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb
-><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb
-><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb>
-<C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><
-C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:
-/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/U
-sers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/U
-sers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/U
-sers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Us
-ers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Us
-ers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt9.pfb>
-Output written on informe.pdf (14 pages, 5660776 bytes).
+><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pf
+b><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pf
+b><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
+><C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
+<C:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C
+:/Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/
+Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/
+Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/
+Users/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/U
+sers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/U
+sers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/U
+sers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt8.pfb><C:/Us
+ers/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt9.pfb><C:/Use
+rs/moran/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
+Output written on informe.pdf (19 pages, 7378060 bytes).
 PDF statistics:
- 487 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 44770 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 687 PDF objects out of 1000 (max. 8388607)
+ 165 named destinations out of 1000 (max. 500000)
+ 51959 words of extra memory for PDF output out of 61914 (max. 10000000)
 

@@ -8,74 +8,104 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\citation{lin2014coco}
-\citation{moore2020fiftyone}
 \babel@aux{spanish}{}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introducción}{1}{section.1}\protected@file@percent }
+\citation{lin2014coco}
+\citation{moore2020fiftyone}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Conjunto de datos}{2}{section.2}\protected@file@percent }
 \newlabel{sec:datos}{{2}{2}{Conjunto de datos}{section.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Fuente y selección}{2}{subsection.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Distribución de instancias anotadas por clase en el subconjunto construido (5.000 imágenes de COCO 2017).}}{2}{figure.caption.1}\protected@file@percent }
+\newlabel{lst:descarga}{{1}{2}{Descarga selectiva de COCO 2017 con FiftyOne (solo imágenes con las 8 clases) y filtrado de las anotaciones}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}{\ignorespaces Descarga selectiva de COCO 2017 con FiftyOne (solo imágenes con las 8 clases) y filtrado de las anotaciones.}}{2}{lstlisting.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Distribución de instancias anotadas por clase en el subconjunto construido (5.000 imágenes de COCO 2017).}}{3}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:dist}{{1}{2}{Distribución de instancias anotadas por clase en el subconjunto construido (5.000 imágenes de COCO 2017)}{figure.caption.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Particiones}{2}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Conversión al formato YOLO de segmentación}{2}{subsection.2.3}\protected@file@percent }
+\newlabel{fig:dist}{{1}{3}{Distribución de instancias anotadas por clase en el subconjunto construido (5.000 imágenes de COCO 2017)}{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Particiones}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{lst:split}{{2}{3}{Partición reproducible 60/15/25\,\% a nivel de imagen, con control de integridad (particiones disjuntas y exhaustivas)}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}{\ignorespaces Partición reproducible 60/15/25\,\% a nivel de imagen, con control de integridad (particiones disjuntas y exhaustivas).}}{3}{lstlisting.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Conversión al formato YOLO de segmentación}{3}{subsection.2.3}\protected@file@percent }
 \citation{jocher2023yolov8}
 \citation{redmon2016yolo}
 \citation{bolya2019yolact}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Verificación de la conversión: anotaciones reconstruidas desde los archivos YOLO exportados, superpuestas sobre tres imágenes de entrenamiento. Los polígonos coinciden con los contornos de los objetos y las etiquetas de clase son correctas.}}{3}{figure.caption.2}\protected@file@percent }
-\newlabel{fig:verificacion}{{2}{3}{Verificación de la conversión: anotaciones reconstruidas desde los archivos YOLO exportados, superpuestas sobre tres imágenes de entrenamiento. Los polígonos coinciden con los contornos de los objetos y las etiquetas de clase son correctas}{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Metodología}{3}{section.3}\protected@file@percent }
-\newlabel{sec:metodo}{{3}{3}{Metodología}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Arquitectura: YOLOv8n-seg}{3}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Preprocesamiento y aumento de datos}{4}{subsection.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Esquema de aumento de datos empleado durante el entrenamiento.}}{4}{table.caption.3}\protected@file@percent }
-\newlabel{tab:aug}{{1}{4}{Esquema de aumento de datos empleado durante el entrenamiento}{table.caption.3}{}}
+\newlabel{lst:export}{{3}{4}{Conversión de máscaras de instancia a polígonos y exportación de las tres particiones al formato YOLO de segmentación}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}{\ignorespaces Conversión de máscaras de instancia a polígonos y exportación de las tres particiones al formato YOLO de segmentación.}}{4}{lstlisting.3}\protected@file@percent }
+\newlabel{lst:saneamiento}{{4}{4}{Saneamiento: se descartan las líneas cuyo polígono quedó con menos de tres vértices (que Ultralytics rechazaría)}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}{\ignorespaces Saneamiento: se descartan las líneas cuyo polígono quedó con menos de tres vértices (que Ultralytics rechazaría).}}{4}{lstlisting.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Verificación de la conversión: anotaciones reconstruidas desde los archivos YOLO exportados, superpuestas sobre tres imágenes de entrenamiento. Los polígonos coinciden con los contornos de los objetos y las etiquetas de clase son correctas.}}{4}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:verificacion}{{2}{4}{Verificación de la conversión: anotaciones reconstruidas desde los archivos YOLO exportados, superpuestas sobre tres imágenes de entrenamiento. Los polígonos coinciden con los contornos de los objetos y las etiquetas de clase son correctas}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Metodología}{4}{section.3}\protected@file@percent }
+\newlabel{sec:metodo}{{3}{4}{Metodología}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Arquitectura: YOLOv8n-seg}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Preprocesamiento y aumento de datos}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Esquema de aumento de datos empleado durante el entrenamiento.}}{5}{table.caption.3}\protected@file@percent }
+\newlabel{tab:aug}{{1}{5}{Esquema de aumento de datos empleado durante el entrenamiento}{table.caption.3}{}}
 \citation{loshchilov2019adamw}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Lote de entrenamiento real con aumento \emph  {mosaic}: cada muestra compone cuatro imágenes con sus máscaras transformadas de manera consistente.}}{5}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:mosaico}{{3}{5}{Lote de entrenamiento real con aumento \emph {mosaic}: cada muestra compone cuatro imágenes con sus máscaras transformadas de manera consistente}{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Configuración del entrenamiento}{5}{subsection.3.3}\protected@file@percent }
-\newlabel{sec:config}{{3.3}{5}{Configuración del entrenamiento}{subsection.3.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Configuración del entrenamiento.}}{5}{table.caption.5}\protected@file@percent }
-\newlabel{tab:config}{{2}{5}{Configuración del entrenamiento}{table.caption.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Experimentos y resultados}{6}{section.4}\protected@file@percent }
-\newlabel{sec:resultados}{{4}{6}{Experimentos y resultados}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Protocolo de evaluación}{6}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Curvas de aprendizaje}{6}{subsection.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Evolución del entrenamiento. Izquierda: pérdidas de caja y de segmentación en entrenamiento (línea continua) y validación (línea discontinua). Derecha: mAP@50 y mAP@50-95 sobre la partición de validación, para cajas y máscaras.}}{6}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:curvas}{{4}{6}{Evolución del entrenamiento. Izquierda: pérdidas de caja y de segmentación en entrenamiento (línea continua) y validación (línea discontinua). Derecha: mAP@50 y mAP@50-95 sobre la partición de validación, para cajas y máscaras}{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Métricas sobre la partición de prueba}{6}{subsection.4.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Métricas globales sobre la partición de prueba (1.250 imágenes, 7.117 instancias).}}{7}{table.caption.7}\protected@file@percent }
-\newlabel{tab:global}{{3}{7}{Métricas globales sobre la partición de prueba (1.250 imágenes, 7.117 instancias)}{table.caption.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Métricas por clase sobre la partición de prueba.}}{7}{table.caption.8}\protected@file@percent }
-\newlabel{tab:porclase}{{4}{7}{Métricas por clase sobre la partición de prueba}{table.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces mAP@50-95 por clase sobre la partición de prueba, para cajas y máscaras.}}{7}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:porclase}{{5}{7}{mAP@50-95 por clase sobre la partición de prueba, para cajas y máscaras}{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Matriz de confusión y curvas precisión--recall}{8}{subsection.4.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Matriz de confusión normalizada por columnas sobre la partición de prueba (columnas: clase real; filas: clase predicha). La diagonal concentra las predicciones correctas; la última fila corresponde a objetos reales no detectados (omisiones).}}{8}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:confusion}{{6}{8}{Matriz de confusión normalizada por columnas sobre la partición de prueba (columnas: clase real; filas: clase predicha). La diagonal concentra las predicciones correctas; la última fila corresponde a objetos reales no detectados (omisiones)}{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Curvas precisión--recall por clase sobre la partición de prueba, con umbral de IoU de 0,5. El área bajo cada curva es la AP@50 de la clase.}}{9}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:pr}{{7}{9}{Curvas precisión--recall por clase sobre la partición de prueba, con umbral de IoU de 0,5. El área bajo cada curva es la AP@50 de la clase}{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Comparación con el modelo de referencia}{9}{subsection.4.5}\protected@file@percent }
-\newlabel{sec:baseline}{{4.5}{9}{Comparación con el modelo de referencia}{subsection.4.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Comparación del mAP@50-95 de máscaras por clase, sobre la partición de prueba, entre el modelo preentrenado de referencia y el modelo ajustado.}}{9}{table.caption.12}\protected@file@percent }
-\newlabel{tab:baseline}{{5}{9}{Comparación del mAP@50-95 de máscaras por clase, sobre la partición de prueba, entre el modelo preentrenado de referencia y el modelo ajustado}{table.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Aporte del ajuste fino por clase: mAP@50-95 de máscaras sobre la partición de prueba.}}{10}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:baseline}{{8}{10}{Aporte del ajuste fino por clase: mAP@50-95 de máscaras sobre la partición de prueba}{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Análisis cualitativo}{10}{subsection.4.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Lote de entrenamiento real con aumento \emph  {mosaic}: cada muestra compone cuatro imágenes con sus máscaras transformadas de manera consistente.}}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:mosaico}{{3}{6}{Lote de entrenamiento real con aumento \emph {mosaic}: cada muestra compone cuatro imágenes con sus máscaras transformadas de manera consistente}{figure.caption.4}{}}
+\newlabel{lst:aug}{{5}{6}{Hiperparámetros de aumento de datos, declarados explícitamente y pasados luego a \texttt {model.train}}{lstlisting.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}{\ignorespaces Hiperparámetros de aumento de datos, declarados explícitamente y pasados luego a \texttt  {model.train}.}}{6}{lstlisting.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Configuración del entrenamiento}{6}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:config}{{3.3}{6}{Configuración del entrenamiento}{subsection.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Configuración del entrenamiento.}}{7}{table.caption.5}\protected@file@percent }
+\newlabel{tab:config}{{2}{7}{Configuración del entrenamiento}{table.caption.5}{}}
+\newlabel{lst:train}{{6}{7}{Ajuste fino de YOLOv8n-seg desde los pesos preentrenados en COCO, con el \emph {backbone} congelado y los hiperparámetros de aumento del Código~\ref {lst:aug}}{lstlisting.6}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}{\ignorespaces Ajuste fino de YOLOv8n-seg desde los pesos preentrenados en COCO, con el \emph  {backbone} congelado y los hiperparámetros de aumento del Código~\ref {lst:aug}.}}{7}{lstlisting.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimentos y resultados}{7}{section.4}\protected@file@percent }
+\newlabel{sec:resultados}{{4}{7}{Experimentos y resultados}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Protocolo de evaluación}{7}{subsection.4.1}\protected@file@percent }
+\newlabel{lst:val}{{7}{7}{Evaluación del modelo ajustado sobre la partición de prueba; \texttt {plots=True} genera la matriz de confusión y las curvas precisión--recall}{lstlisting.7}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}{\ignorespaces Evaluación del modelo ajustado sobre la partición de prueba; \texttt  {plots=True} genera la matriz de confusión y las curvas precisión--recall.}}{7}{lstlisting.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Curvas de aprendizaje}{8}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Evolución del entrenamiento. Izquierda: pérdidas de caja y de segmentación en entrenamiento (línea continua) y validación (línea discontinua). Derecha: mAP@50 y mAP@50-95 sobre la partición de validación, para cajas y máscaras.}}{8}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:curvas}{{4}{8}{Evolución del entrenamiento. Izquierda: pérdidas de caja y de segmentación en entrenamiento (línea continua) y validación (línea discontinua). Derecha: mAP@50 y mAP@50-95 sobre la partición de validación, para cajas y máscaras}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Métricas sobre la partición de prueba}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Métricas globales sobre la partición de prueba (1.250 imágenes, 7.117 instancias).}}{8}{table.caption.7}\protected@file@percent }
+\newlabel{tab:global}{{3}{8}{Métricas globales sobre la partición de prueba (1.250 imágenes, 7.117 instancias)}{table.caption.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Métricas por clase sobre la partición de prueba.}}{9}{table.caption.8}\protected@file@percent }
+\newlabel{tab:porclase}{{4}{9}{Métricas por clase sobre la partición de prueba}{table.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces mAP@50-95 por clase sobre la partición de prueba, para cajas y máscaras.}}{9}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:porclase}{{5}{9}{mAP@50-95 por clase sobre la partición de prueba, para cajas y máscaras}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Matriz de confusión y curvas precisión--recall}{10}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Matriz de confusión normalizada por columnas sobre la partición de prueba (columnas: clase real; filas: clase predicha). La diagonal concentra las predicciones correctas; la última fila corresponde a objetos reales no detectados (omisiones).}}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:confusion}{{6}{10}{Matriz de confusión normalizada por columnas sobre la partición de prueba (columnas: clase real; filas: clase predicha). La diagonal concentra las predicciones correctas; la última fila corresponde a objetos reales no detectados (omisiones)}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Curvas precisión--recall por clase sobre la partición de prueba, con umbral de IoU de 0,5. El área bajo cada curva es la AP@50 de la clase.}}{10}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:pr}{{7}{10}{Curvas precisión--recall por clase sobre la partición de prueba, con umbral de IoU de 0,5. El área bajo cada curva es la AP@50 de la clase}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Comparación imparcial con el modelo de referencia}{11}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:baseline}{{4.5}{11}{Comparación imparcial con el modelo de referencia}{subsection.4.5}{}}
+\newlabel{lst:baseline}{{8}{11}{Construcción de una partición de prueba imparcial desde COCO val2017 (no vista por ninguno de los dos modelos) y evaluación equitativa del ajustado y del preentrenado sobre ella}{lstlisting.8}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}{\ignorespaces Construcción de una partición de prueba imparcial desde COCO val2017 (no vista por ninguno de los dos modelos) y evaluación equitativa del ajustado y del preentrenado sobre ella.}}{11}{lstlisting.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Comparación imparcial del mAP@50-95 de máscaras por clase, sobre la partición independiente de COCO val2017 (datos no vistos por ninguno de los dos modelos), entre el preentrenado de referencia y el modelo ajustado.}}{11}{table.caption.12}\protected@file@percent }
+\newlabel{tab:baseline}{{5}{11}{Comparación imparcial del mAP@50-95 de máscaras por clase, sobre la partición independiente de COCO val2017 (datos no vistos por ninguno de los dos modelos), entre el preentrenado de referencia y el modelo ajustado}{table.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Comparación imparcial por clase (mAP@50-95 de máscaras sobre COCO val2017): el modelo ajustado se aproxima al preentrenado en la mayoría de las clases, con paridad en \texttt  {person} y \texttt  {mouse}.}}{12}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:baseline}{{8}{12}{Comparación imparcial por clase (mAP@50-95 de máscaras sobre COCO val2017): el modelo ajustado se aproxima al preentrenado en la mayoría de las clases, con paridad en \texttt {person} y \texttt {mouse}}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Ablación: efecto de congelar el \emph  {backbone}}{12}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:ablacion}{{4.6}{12}{Ablación: efecto de congelar el \emph {backbone}}{subsection.4.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Ablación sobre la partición de prueba: efecto de la estrategia de ajuste en el mAP@50-95.}}{12}{table.caption.14}\protected@file@percent }
+\newlabel{tab:ablacion}{{6}{12}{Ablación sobre la partición de prueba: efecto de la estrategia de ajuste en el mAP@50-95}{table.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Análisis cualitativo}{13}{subsection.4.7}\protected@file@percent }
+\newlabel{sec:cualitativo}{{4.7}{13}{Análisis cualitativo}{subsection.4.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Predicciones de ambos modelos sobre el mismo lote de imágenes de COCO val2017 (umbral de confianza 0,4).}}{14}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:cualitativo}{{9}{14}{Predicciones de ambos modelos sobre el mismo lote de imágenes de COCO val2017 (umbral de confianza 0,4)}{figure.caption.15}{}}
 \citation{openvino}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Predicciones de ambos modelos sobre el mismo lote de imágenes de la partición de prueba (umbral de confianza de la rutina de validación).}}{11}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:cualitativo}{{9}{11}{Predicciones de ambos modelos sobre el mismo lote de imágenes de la partición de prueba (umbral de confianza de la rutina de validación)}{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Sistema de inferencia en tiempo real}{11}{section.5}\protected@file@percent }
-\newlabel{sec:tiemporeal}{{5}{11}{Sistema de inferencia en tiempo real}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Implementación}{11}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Desempeño medido}{12}{subsection.5.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Velocidad de inferencia medida (resolución de entrada de 640 píxeles).}}{12}{table.caption.15}\protected@file@percent }
-\newlabel{tab:velocidad}{{6}{12}{Velocidad de inferencia medida (resolución de entrada de 640 píxeles)}{table.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Demostración del sistema en tiempo real sobre cámara web (CPU Intel Core Ultra 5 226V, sin GPU dedicada). Misma escena, cinco objetos detectados y segmentados en ambos casos.}}{12}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:webcam}{{10}{12}{Demostración del sistema en tiempo real sobre cámara web (CPU Intel Core Ultra 5 226V, sin GPU dedicada). Misma escena, cinco objetos detectados y segmentados en ambos casos}{figure.caption.16}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusiones}{12}{section.6}\protected@file@percent }
-\newlabel{sec:conclusiones}{{6}{12}{Conclusiones}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Sistema de inferencia en tiempo real}{15}{section.5}\protected@file@percent }
+\newlabel{sec:tiemporeal}{{5}{15}{Sistema de inferencia en tiempo real}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Implementación}{15}{subsection.5.1}\protected@file@percent }
+\newlabel{lst:demo}{{9}{15}{Núcleo del bucle de inferencia en tiempo real (\texttt {src/demo\_webcam.py}): captura, predicción y superposición de cajas y máscaras cuadro a cuadro}{lstlisting.9}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}{\ignorespaces Núcleo del bucle de inferencia en tiempo real (\texttt  {src/demo\_webcam.py}): captura, predicción y superposición de cajas y máscaras cuadro a cuadro.}}{15}{lstlisting.9}\protected@file@percent }
+\newlabel{lst:openvino}{{10}{15}{Exportación de los pesos entrenados al formato OpenVINO para acelerar la inferencia sobre CPU Intel}{lstlisting.10}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}{\ignorespaces Exportación de los pesos entrenados al formato OpenVINO para acelerar la inferencia sobre CPU Intel.}}{15}{lstlisting.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Desempeño medido}{15}{subsection.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Velocidad de inferencia medida (resolución de entrada de 640 píxeles).}}{15}{table.caption.16}\protected@file@percent }
+\newlabel{tab:velocidad}{{7}{15}{Velocidad de inferencia medida (resolución de entrada de 640 píxeles)}{table.caption.16}{}}
+\citation{gradio}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Demostración del sistema en tiempo real sobre cámara web (CPU Intel Core Ultra 5 226V, sin GPU dedicada). Misma escena, cinco objetos detectados y segmentados en ambos casos.}}{16}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:webcam}{{10}{16}{Demostración del sistema en tiempo real sobre cámara web (CPU Intel Core Ultra 5 226V, sin GPU dedicada). Misma escena, cinco objetos detectados y segmentados en ambos casos}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Prueba en servidor Hugging Face}{16}{section.6}\protected@file@percent }
+\newlabel{sec:nube}{{6}{16}{Prueba en servidor Hugging Face}{section.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Aplicación desplegada en Hugging Face Spaces (estado \emph  {Running}), pestaña \emph  {Imagen}. Sobre una escena de escritorio, el modelo detecta y segmenta cuatro clases objetivo (\texttt  {person}, \texttt  {bottle}, \texttt  {cup} y \texttt  {cell phone}) con umbral de confianza 0,2 y resolución de inferencia de 480~píxeles.}}{17}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:huggingface}{{11}{17}{Aplicación desplegada en Hugging Face Spaces (estado \emph {Running}), pestaña \emph {Imagen}. Sobre una escena de escritorio, el modelo detecta y segmenta cuatro clases objetivo (\texttt {person}, \texttt {bottle}, \texttt {cup} y \texttt {cell phone}) con umbral de confianza 0,2 y resolución de inferencia de 480~píxeles}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusiones}{17}{section.7}\protected@file@percent }
+\newlabel{sec:conclusiones}{{7}{17}{Conclusiones}{section.7}{}}
 \bibcite{lin2014coco}{1}
 \bibcite{jocher2023yolov8}{2}
 \bibcite{bolya2019yolact}{3}
@@ -83,4 +113,5 @@
 \bibcite{moore2020fiftyone}{5}
 \bibcite{loshchilov2019adamw}{6}
 \bibcite{openvino}{7}
-\gdef \@abspage@last{14}
+\bibcite{gradio}{8}
+\gdef \@abspage@last{19}

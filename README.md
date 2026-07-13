@@ -21,6 +21,7 @@ TPF - Computer Vision/
 ├── src/
 │   ├── demo_webcam.py          Inferencia en tiempo real (webcam/video) con FPS
 │   └── export_openvino.py      Exportación opcional a OpenVINO (CPU Intel)
+├── demo_nube/                  Demo web (Gradio) para Hugging Face Spaces — corre en la nube
 ├── data/                       Dataset en formato YOLO (generado; NO se sube ni entrega)
 ├── models/                     Pesos entrenados (yolov8n_seg_best.pt) — entregable
 ├── runs/                       Salidas de entrenamiento/evaluación (generado)
@@ -74,5 +75,6 @@ Si los FPS resultan bajos, reducir la resolución de inferencia: `--imgsz 480` o
 | Inferencia en tiempo real | `src/demo_webcam.py` (FPS en pantalla) |
 | Pipeline completo | Notebooks 01→03 + scripts de `src/` |
 | Modelo entrenado | `models/yolov8n_seg_best.pt` |
-| Reporte técnico | `reporte/reporte_tecnico.md` |
+| Reporte técnico (con código en cada paso) | `reporte/TPF - DL - Federico Moran.pdf` (fuente: `reporte/informe.tex`) |
+| Demo en la nube (solo un link, sin descargas) | `demo_nube/` → Hugging Face Space (Gradio) |
 | Presentación oral con demo | `presentacion/guion_presentacion.md` + demo webcam |
