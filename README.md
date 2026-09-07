@@ -141,11 +141,10 @@ python src/demo_webcam.py --imgsz 480
 | `notebooks/` | The three pipeline stages, executed with outputs |
 | `src/` | Real-time demo and OpenVINO export |
 | `models/` | Trained weights (`yolov8n_seg_best.pt`) + OpenVINO model + ablation run |
-| `reporte/` | Technical report (19 pages, PDF + LaTeX source) and figures |
-| `presentacion/` | Slide deck (Beamer, 34 slides) |
-| `runs/` | Training curves, confusion matrices, evaluation outputs |
-| `HANDOFF.md` | Full engineering log: every defect, fix and design decision |
-| `README_entrega_academica.md` | Original academic submission README |
+| `reporte/` | Technical report (19 pages, PDF) and its figures |
+| `presentacion/` | Slide deck (34 slides, PDF) |
+| `runs/` | Training curves, confusion matrices and evaluation outputs |
+| `README_entrega_academica.md` | Original academic submission README (Spanish) |
 
 ## Stack
 

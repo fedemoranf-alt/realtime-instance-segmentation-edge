@@ -7,3 +7,22 @@ data/
 Entregables/
 yolov8n-seg.pt
 Federico_Moran-Pipeline_modelos_app.zip
+# --- Portfolio hygiene: only the essentials are published ---
+
+# LaTeX sources and build artefacts (the compiled PDFs are what ships)
+*.tex
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+# Working notes: kept locally, not published
+HANDOFF.md
+Indicaciones.txt
+reporte/reporte_tecnico.md
+presentacion/*.md
+
+# Byte-identical duplicates of files already published elsewhere in the repo
+reporte/informe.pdf
+presentacion/presentacion.pdf
+runs/*/weights/
